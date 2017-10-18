@@ -11,6 +11,35 @@
 |
 */
 
+// Prikaz svih taskova u bazi
 Route::get('/', function () {
-    return view('welcome');
+    return view ('task');
 });
+
+// Dodavanje novog taska
+Route::post('/task', function (Request $request){
+	$validator = Validator::make($request->all(),[
+		'name'=> 'required|max:255',
+	] );
+	
+	if ($validator->fails()) {
+		return redirect('/')->withInput()->withErrors($validator);
+	}
+	
+	// stvaranje Taska
+	$task = new Task;
+	$task->name = $request->name;
+	$task->save();
+	
+	return redirect('/');
+});
+
+//Brisanje postojećeg taska
+Route::delete('/task/{id}', function ($id) {
+	//kod za brisanje taska
+});
+
+//Prikaz određenog taska
+Route::get('/task/{id}', function ($id) {
+	//kod za prikaz taska
+}
