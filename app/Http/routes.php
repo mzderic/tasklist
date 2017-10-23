@@ -11,6 +11,7 @@
 |
 */
 use App\Task;
+use Illuminate\Http\Request;
 
 // Prikaz svih taskova u bazi
 Route::get('/', function () {
