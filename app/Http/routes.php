@@ -10,10 +10,15 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\Task;
 
 // Prikaz svih taskova u bazi
 Route::get('/', function () {
-    return view ('task');
+    //return view ('tasks');
+	$tasks = Task::orderBy('created_at', 'asc')->get();
+	
+	
+	return view('tasks', [ 'tasks' => $tasks]);
 });
 
 // Dodavanje novog taska
@@ -42,4 +47,4 @@ Route::delete('/task/{id}', function ($id) {
 //Prikaz određenog taska
 Route::get('/task/{id}', function ($id) {
 	//kod za prikaz taska
-}
+});
