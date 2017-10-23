@@ -14,38 +14,20 @@ use App\Task;
 use Illuminate\Http\Request;
 
 // Prikaz svih taskova u bazi
-Route::get('/', function () {
-    //return view ('tasks');
-	$tasks = Task::orderBy('created_at', 'asc')->get();
-	
-	
-	return view('tasks', [ 'tasks' => $tasks]);
-});
+Route::get('/', 'TaskList@index');
 
 // Dodavanje novog taska
-Route::post('/task', function (Request $request){
-	$validator = Validator::make($request->all(),[
-		'name'=> 'required|max:255',
-	] );
+Route::post('/task', 'TaskList@store');
 	
-	if ($validator->fails()) {
-		return redirect('/')->withInput()->withErrors($validator);
-	}
-	
-	// stvaranje Taska
-	$task = new Task;
-	$task->name = $request->name;
-	$task->save();
-	
-	return redirect('/');
-});
+
 
 //Brisanje postojećeg taska
-Route::delete('/task/{id}', function ($id) {
-	//kod za brisanje taska
-});
+Route::delete('/task/{id}', 'TaskList@destroy');
+	
+	
 
 //Prikaz određenog taska
-Route::get('/task/{id}', function ($id) {
-	//kod za prikaz taska
-});
+Route::get('/task/{id}', 'TaskList@show');
+	
+	
+
