@@ -9,6 +9,7 @@
                 </div>
 				<div class="panel-body">
 					<!-- mjesto za prikaz grešaka -->
+					@include('common.errors')
 					
 					<!-- WebObrazac za novi Task -->
 					<form action="/task" method="POST" class="form-horizontal">
@@ -51,7 +52,9 @@
 								<tbody>
 									@foreach ($tasks as $task)
 										<tr>
-											<td class="table-text"><div>{{ $task->name }}</div></td>
+											<td class="table-text">
+												<div><a href="task/{{ $task->id}}">{{ $task->name }}</a></div>
+												</td>
 											
 											<!-- Gumb za brisanje -->
 											<td>
